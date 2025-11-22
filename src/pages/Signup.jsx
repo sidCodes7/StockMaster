@@ -2,23 +2,29 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import { Input, Button, Alert } from '../components/UI';
+import { Input, Select, Button, Alert } from '../components/UI';
 import { isValidEmail } from '../utils/helpers';
 
 const Signup = () => {
   const navigate = useNavigate();
   const { signup } = useAuth();
   const [formData, setFormData] = useState({
+    loginId: '',
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    role: 'Warehouse Staff' // Default role
   });
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
   const validate = () => {
     const newErrors = {};
+
+    if (!formData.loginId.trim()) {
+      newErrors.loginId = 'Login ID is required';
+    }
 
     if (!formData.name.trim()) {
       newErrors.name = 'Name is required';
@@ -50,7 +56,7 @@ const Signup = () => {
     if (!validate()) return;
 
     setLoading(true);
-    const result = signup(formData.name, formData.email, formData.password);
+    const result = signup(formData.loginId, formData.name, formData.email, formData.password, formData.role);
     
     if (result.success) {
       navigate('/dashboard');
@@ -79,6 +85,16 @@ const Signup = () => {
           {/* Signup Form */}
           <form onSubmit={handleSubmit} className="mt-6 space-y-4">
             <Input
+              label="Login ID"
+              type="text"
+              placeholder="admin001"
+              value={formData.loginId}
+              onChange={(e) => setFormData({ ...formData, loginId: e.target.value })}
+              error={errors.loginId}
+              required
+            />
+
+            <Input
               label="Full Name"
               type="text"
               placeholder="John Doe"
@@ -95,6 +111,17 @@ const Signup = () => {
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               error={errors.email}
+              required
+            />
+
+            <Select
+              label="Role"
+              value={formData.role}
+              onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+              options={[
+                { value: 'Inventory Manager', label: 'Inventory Manager' },
+                { value: 'Warehouse Staff', label: 'Warehouse Staff' }
+              ]}
               required
             />
 

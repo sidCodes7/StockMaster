@@ -1,231 +1,334 @@
-// Mock data for StockMaster application
+// Mock data for StockMaster application - Aligned with Backend Schema
 
+// Users: Login ID, Email, Password, Role
 export const users = [
   {
     id: 1,
+    loginId: 'admin001',
     name: 'Admin User',
     email: 'admin@stockmaster.com',
     password: 'admin123',
-    role: 'Admin',
+    role: 'Inventory Manager', // Inventory Manager or Warehouse Staff
+    avatar: null
+  },
+  {
+    id: 2,
+    loginId: 'staff001',
+    name: 'John Warehouse',
+    email: 'john@stockmaster.com',
+    password: 'staff123',
+    role: 'Warehouse Staff',
     avatar: null
   }
 ];
 
+// Warehouses: WarehouseName, WarehouseShortCode, Address
 export const warehouses = [
-  { id: 1, name: 'Main Warehouse', location: 'New York, NY', code: 'WH001', capacity: 50000, currentStock: 35000 },
-  { id: 2, name: 'West Coast Hub', location: 'Los Angeles, CA', code: 'WH002', capacity: 40000, currentStock: 28000 },
-  { id: 3, name: 'Distribution Center', location: 'Chicago, IL', code: 'WH003', capacity: 30000, currentStock: 15000 },
-  { id: 4, name: 'Regional Storage', location: 'Houston, TX', code: 'WH004', capacity: 25000, currentStock: 18000 }
-];
-
-export const products = [
-  {
-    id: 1,
-    sku: 'PROD-001',
-    name: 'Wireless Mouse',
-    category: 'Electronics',
-    description: 'Ergonomic wireless mouse with USB receiver',
-    unitPrice: 29.99,
-    stock: [
-      { warehouseId: 1, quantity: 150, minStock: 50 },
-      { warehouseId: 2, quantity: 100, minStock: 30 }
-    ],
-    status: 'Active',
-    supplier: 'Tech Supplies Inc',
-    image: null
+  { 
+    id: 1, 
+    warehouseName: 'Main Warehouse', 
+    warehouseShortCode: 'WH001', 
+    address: '123 Industrial Blvd, New York, NY 10001',
+    capacity: 50000, 
+    currentStock: 35000 
   },
-  {
-    id: 2,
-    sku: 'PROD-002',
-    name: 'USB-C Cable',
-    category: 'Electronics',
-    description: '6ft USB-C to USB-A cable',
-    unitPrice: 12.99,
-    stock: [
-      { warehouseId: 1, quantity: 45, minStock: 100 },
-      { warehouseId: 3, quantity: 80, minStock: 50 }
-    ],
-    status: 'Active',
-    supplier: 'Cable Co',
-    image: null
+  { 
+    id: 2, 
+    warehouseName: 'West Coast Hub', 
+    warehouseShortCode: 'WH002', 
+    address: '456 Logistics Ave, Los Angeles, CA 90001',
+    capacity: 40000, 
+    currentStock: 28000 
   },
-  {
-    id: 3,
-    sku: 'PROD-003',
-    name: 'Mechanical Keyboard',
-    category: 'Electronics',
-    description: 'RGB mechanical gaming keyboard',
-    unitPrice: 89.99,
-    stock: [
-      { warehouseId: 1, quantity: 75, minStock: 20 },
-      { warehouseId: 2, quantity: 60, minStock: 20 }
-    ],
-    status: 'Active',
-    supplier: 'Tech Supplies Inc',
-    image: null
+  { 
+    id: 3, 
+    warehouseName: 'Distribution Center', 
+    warehouseShortCode: 'WH003', 
+    address: '789 Storage St, Chicago, IL 60601',
+    capacity: 30000, 
+    currentStock: 15000 
   },
-  {
-    id: 4,
-    sku: 'PROD-004',
-    name: 'Laptop Stand',
-    category: 'Accessories',
-    description: 'Adjustable aluminum laptop stand',
-    unitPrice: 45.99,
-    stock: [
-      { warehouseId: 2, quantity: 120, minStock: 30 },
-      { warehouseId: 4, quantity: 90, minStock: 25 }
-    ],
-    status: 'Active',
-    supplier: 'Office Goods Ltd',
-    image: null
-  },
-  {
-    id: 5,
-    sku: 'PROD-005',
-    name: 'Monitor 27"',
-    category: 'Electronics',
-    description: '27-inch 4K LED monitor',
-    unitPrice: 299.99,
-    stock: [
-      { warehouseId: 1, quantity: 35, minStock: 15 },
-      { warehouseId: 3, quantity: 28, minStock: 10 }
-    ],
-    status: 'Active',
-    supplier: 'Display Tech',
-    image: null
-  },
-  {
-    id: 6,
-    sku: 'PROD-006',
-    name: 'Webcam HD',
-    category: 'Electronics',
-    description: '1080p HD webcam with microphone',
-    unitPrice: 59.99,
-    stock: [
-      { warehouseId: 1, quantity: 18, minStock: 40 },
-      { warehouseId: 2, quantity: 25, minStock: 30 }
-    ],
-    status: 'Active',
-    supplier: 'Tech Supplies Inc',
-    image: null
+  { 
+    id: 4, 
+    warehouseName: 'Regional Storage', 
+    warehouseShortCode: 'WH004', 
+    address: '321 Depot Dr, Houston, TX 77001',
+    capacity: 25000, 
+    currentStock: 18000 
   }
 ];
 
+// Locations: LocationName, LocationShortCode, WarehouseShortCode
+export const locations = [
+  { id: 1, locationName: 'Shelf A1', locationShortCode: 'SA1', warehouseShortCode: 'WH001' },
+  { id: 2, locationName: 'Shelf A2', locationShortCode: 'SA2', warehouseShortCode: 'WH001' },
+  { id: 3, locationName: 'Shelf B1', locationShortCode: 'SB1', warehouseShortCode: 'WH001' },
+  { id: 4, locationName: 'Rack R1', locationShortCode: 'R1', warehouseShortCode: 'WH002' },
+  { id: 5, locationName: 'Rack R2', locationShortCode: 'R2', warehouseShortCode: 'WH002' },
+  { id: 6, locationName: 'Zone Z1', locationShortCode: 'Z1', warehouseShortCode: 'WH003' },
+  { id: 7, locationName: 'Zone Z2', locationShortCode: 'Z2', warehouseShortCode: 'WH003' },
+  { id: 8, locationName: 'Area A1', locationShortCode: 'A1', warehouseShortCode: 'WH004' }
+];
+
+// Stock: ProductName, UnitCost, InventoryCount, FreetoUseInventory
+export const products = [
+  {
+    id: 1,
+    productName: 'Wireless Mouse',
+    unitCost: 29.99,
+    inventoryCount: 250, // Total across all warehouses
+    freeToUseInventory: 240, // Available inventory (not reserved)
+    category: 'Electronics',
+    description: 'Ergonomic wireless mouse with USB receiver',
+    stock: [
+      { warehouseId: 1, warehouseShortCode: 'WH001', quantity: 150, reserved: 5 },
+      { warehouseId: 2, warehouseShortCode: 'WH002', quantity: 100, reserved: 5 }
+    ],
+    status: 'Active',
+    supplier: 'Tech Supplies Inc',
+    sku: 'PROD-001'
+  },
+  {
+    id: 2,
+    productName: 'USB-C Cable',
+    unitCost: 12.99,
+    inventoryCount: 125,
+    freeToUseInventory: 115,
+    category: 'Electronics',
+    description: '6ft USB-C to USB-A cable',
+    stock: [
+      { warehouseId: 1, warehouseShortCode: 'WH001', quantity: 45, reserved: 5 },
+      { warehouseId: 3, warehouseShortCode: 'WH003', quantity: 80, reserved: 5 }
+    ],
+    status: 'Active',
+    supplier: 'Cable Co',
+    sku: 'PROD-002'
+  },
+  {
+    id: 3,
+    productName: 'Mechanical Keyboard',
+    unitCost: 89.99,
+    inventoryCount: 135,
+    freeToUseInventory: 130,
+    category: 'Electronics',
+    description: 'RGB mechanical gaming keyboard',
+    stock: [
+      { warehouseId: 1, warehouseShortCode: 'WH001', quantity: 75, reserved: 3 },
+      { warehouseId: 2, warehouseShortCode: 'WH002', quantity: 60, reserved: 2 }
+    ],
+    status: 'Active',
+    supplier: 'Tech Supplies Inc',
+    sku: 'PROD-003'
+  },
+  {
+    id: 4,
+    productName: 'Laptop Stand',
+    unitCost: 45.99,
+    inventoryCount: 210,
+    freeToUseInventory: 205,
+    category: 'Accessories',
+    description: 'Adjustable aluminum laptop stand',
+    stock: [
+      { warehouseId: 2, warehouseShortCode: 'WH002', quantity: 120, reserved: 3 },
+      { warehouseId: 4, warehouseShortCode: 'WH004', quantity: 90, reserved: 2 }
+    ],
+    status: 'Active',
+    supplier: 'Office Goods Ltd',
+    sku: 'PROD-004'
+  },
+  {
+    id: 5,
+    productName: 'Monitor 27"',
+    unitCost: 299.99,
+    inventoryCount: 63,
+    freeToUseInventory: 58,
+    category: 'Electronics',
+    description: '27-inch 4K LED monitor',
+    stock: [
+      { warehouseId: 1, warehouseShortCode: 'WH001', quantity: 35, reserved: 3 },
+      { warehouseId: 3, warehouseShortCode: 'WH003', quantity: 28, reserved: 2 }
+    ],
+    status: 'Active',
+    supplier: 'Display Tech',
+    sku: 'PROD-005'
+  },
+  {
+    id: 6,
+    productName: 'Webcam HD',
+    unitCost: 59.99,
+    inventoryCount: 43,
+    freeToUseInventory: 38,
+    category: 'Electronics',
+    description: '1080p HD webcam with microphone',
+    stock: [
+      { warehouseId: 1, warehouseShortCode: 'WH001', quantity: 18, reserved: 3 },
+      { warehouseId: 2, warehouseShortCode: 'WH002', quantity: 25, reserved: 2 }
+    ],
+    status: 'Active',
+    supplier: 'Tech Supplies Inc',
+    sku: 'PROD-006'
+  }
+];
+
+// Receipt: ReferenceID, From, To, ContactName, ScheduleDate, Status, ProductName, Quantity
 export const receipts = [
   {
     id: 1,
-    reference: 'REC-2024-001',
-    supplier: 'Tech Supplies Inc',
-    warehouseId: 1,
-    scheduledDate: '2024-11-20',
-    status: 'Done',
+    referenceId: 'REC-2024-001',
+    from: 'Tech Supplies Inc', // Supplier/Source
+    to: 'WH001', // Warehouse Short Code
+    contactName: 'John Smith',
+    scheduleDate: '2024-11-20',
+    status: 'Done', // Late, Waiting, Operational
+    productName: 'Wireless Mouse',
+    quantity: 200,
     items: [
-      { productId: 1, productName: 'Wireless Mouse', expectedQty: 200, receivedQty: 200, unitPrice: 25.00 },
-      { productId: 3, productName: 'Mechanical Keyboard', expectedQty: 100, receivedQty: 98, unitPrice: 75.00 }
+      { productId: 1, productName: 'Wireless Mouse', quantity: 200 }
     ],
-    totalValue: 12350.00,
     createdDate: '2024-11-15',
-    validatedDate: '2024-11-20',
+    completedDate: '2024-11-20',
     notes: 'Shipment received in good condition'
   },
   {
     id: 2,
-    reference: 'REC-2024-002',
-    supplier: 'Cable Co',
-    warehouseId: 1,
-    scheduledDate: '2024-11-22',
+    referenceId: 'REC-2024-002',
+    from: 'Cable Co',
+    to: 'WH001',
+    contactName: 'Sarah Johnson',
+    scheduleDate: '2024-11-22',
     status: 'Waiting',
+    productName: 'USB-C Cable',
+    quantity: 500,
     items: [
-      { productId: 2, productName: 'USB-C Cable', expectedQty: 500, receivedQty: 0, unitPrice: 8.00 }
+      { productId: 2, productName: 'USB-C Cable', quantity: 500 }
     ],
-    totalValue: 4000.00,
     createdDate: '2024-11-18',
-    validatedDate: null,
+    completedDate: null,
     notes: 'Expected delivery today'
   },
   {
     id: 3,
-    reference: 'REC-2024-003',
-    supplier: 'Display Tech',
-    warehouseId: 3,
-    scheduledDate: '2024-11-25',
-    status: 'Draft',
+    referenceId: 'REC-2024-003',
+    from: 'Display Tech',
+    to: 'WH003',
+    contactName: 'Mike Wilson',
+    scheduleDate: '2024-11-15',
+    status: 'Late', // Past scheduled date
+    productName: 'Monitor 27"',
+    quantity: 50,
     items: [
-      { productId: 5, productName: 'Monitor 27"', expectedQty: 50, receivedQty: 0, unitPrice: 250.00 }
+      { productId: 5, productName: 'Monitor 27"', quantity: 50 }
     ],
-    totalValue: 12500.00,
-    createdDate: '2024-11-21',
-    validatedDate: null,
-    notes: ''
+    createdDate: '2024-11-10',
+    completedDate: null,
+    notes: 'Delayed shipment'
+  },
+  {
+    id: 4,
+    referenceId: 'REC-2024-004',
+    from: 'Tech Supplies Inc',
+    to: 'WH002',
+    contactName: 'Emily Davis',
+    scheduleDate: '2024-11-23',
+    status: 'Operational',
+    productName: 'Mechanical Keyboard',
+    quantity: 100,
+    items: [
+      { productId: 3, productName: 'Mechanical Keyboard', quantity: 100 }
+    ],
+    createdDate: '2024-11-20',
+    completedDate: null,
+    notes: 'In transit'
   }
 ];
 
+// Delivery: ReferenceID, From, To, Contact, ScheduleDate, Status, DeliveryAddress, OperationType, Responsible, ProductName, Quantity
 export const deliveryOrders = [
   {
     id: 1,
-    reference: 'DO-2024-001',
-    customer: 'ABC Corporation',
-    warehouseId: 1,
-    scheduledDate: '2024-11-21',
-    status: 'Done',
+    referenceId: 'DO-2024-001',
+    from: 'WH001', // Warehouse Short Code
+    to: 'ABC Corporation', // Customer
+    contact: 'Jane Doe',
+    scheduleDate: '2024-11-21',
+    status: 'Done', // Late, Waiting, Operational
+    deliveryAddress: '456 Business Park, New York, NY 10002',
+    operationType: 'Standard Delivery',
+    responsible: 'John Warehouse', // Staff member
+    productName: 'Wireless Mouse',
+    quantity: 50,
     items: [
-      { productId: 1, productName: 'Wireless Mouse', orderedQty: 50, pickedQty: 50, packedQty: 50 },
-      { productId: 2, productName: 'USB-C Cable', orderedQty: 100, pickedQty: 100, packedQty: 100 }
+      { productId: 1, productName: 'Wireless Mouse', quantity: 50 },
+      { productId: 2, productName: 'USB-C Cable', quantity: 100 }
     ],
-    totalValue: 2799.00,
     createdDate: '2024-11-18',
-    shippedDate: '2024-11-21',
+    completedDate: '2024-11-21',
     trackingNumber: 'TRK123456789',
     notes: 'Priority shipment'
   },
   {
     id: 2,
-    reference: 'DO-2024-002',
-    customer: 'XYZ Retail',
-    warehouseId: 2,
-    scheduledDate: '2024-11-23',
-    status: 'Ready',
+    referenceId: 'DO-2024-002',
+    from: 'WH002',
+    to: 'XYZ Retail',
+    contact: 'Robert Brown',
+    scheduleDate: '2024-11-23',
+    status: 'Operational',
+    deliveryAddress: '789 Retail Plaza, Los Angeles, CA 90002',
+    operationType: 'Express Delivery',
+    responsible: 'Admin User',
+    productName: 'Mechanical Keyboard',
+    quantity: 30,
     items: [
-      { productId: 3, productName: 'Mechanical Keyboard', orderedQty: 30, pickedQty: 30, packedQty: 30 },
-      { productId: 4, productName: 'Laptop Stand', orderedQty: 20, pickedQty: 20, packedQty: 20 }
+      { productId: 3, productName: 'Mechanical Keyboard', quantity: 30 },
+      { productId: 4, productName: 'Laptop Stand', quantity: 20 }
     ],
-    totalValue: 3619.70,
     createdDate: '2024-11-20',
-    shippedDate: null,
+    completedDate: null,
     trackingNumber: null,
-    notes: ''
+    notes: 'Ready for pickup'
   },
   {
     id: 3,
-    reference: 'DO-2024-003',
-    customer: 'Tech Store Plus',
-    warehouseId: 1,
-    scheduledDate: '2024-11-24',
+    referenceId: 'DO-2024-003',
+    from: 'WH001',
+    to: 'Tech Store Plus',
+    contact: 'Lisa Martinez',
+    scheduleDate: '2024-11-24',
     status: 'Waiting',
+    deliveryAddress: '321 Tech Ave, Chicago, IL 60602',
+    operationType: 'Standard Delivery',
+    responsible: 'John Warehouse',
+    productName: 'Monitor 27"',
+    quantity: 10,
     items: [
-      { productId: 5, productName: 'Monitor 27"', orderedQty: 10, pickedQty: 10, packedQty: 0 }
+      { productId: 5, productName: 'Monitor 27"', quantity: 10 }
     ],
-    totalValue: 2999.90,
     createdDate: '2024-11-22',
-    shippedDate: null,
+    completedDate: null,
     trackingNumber: null,
     notes: 'Waiting for packing'
   },
   {
     id: 4,
-    reference: 'DO-2024-004',
-    customer: 'Online Buyers',
-    warehouseId: 1,
-    scheduledDate: '2024-11-26',
-    status: 'Draft',
+    referenceId: 'DO-2024-004',
+    from: 'WH001',
+    to: 'Online Buyers',
+    contact: 'David Lee',
+    scheduleDate: '2024-11-18',
+    status: 'Late', // Past scheduled date
+    deliveryAddress: '654 Customer St, Houston, TX 77002',
+    operationType: 'Standard Delivery',
+    responsible: 'Admin User',
+    productName: 'Webcam HD',
+    quantity: 15,
     items: [
-      { productId: 6, productName: 'Webcam HD', orderedQty: 15, pickedQty: 0, packedQty: 0 }
+      { productId: 6, productName: 'Webcam HD', quantity: 15 }
     ],
-    totalValue: 899.85,
-    createdDate: '2024-11-22',
-    shippedDate: null,
+    createdDate: '2024-11-15',
+    completedDate: null,
     trackingNumber: null,
-    notes: ''
+    notes: 'Delayed processing'
   }
 ];
 
@@ -317,108 +420,103 @@ export const stockAdjustments = [
   }
 ];
 
+// MoveHistory: ReferenceID, Date, Contact, From, To, Quantity, Status
 export const moveHistory = [
   {
     id: 1,
+    referenceId: 'DO-2024-001',
     date: '2024-11-21',
-    reference: 'DO-2024-001',
-    type: 'Delivery',
-    productId: 1,
-    productName: 'Wireless Mouse',
-    fromWarehouse: 'Main Warehouse',
-    toLocation: 'ABC Corporation',
+    contact: 'Jane Doe',
+    from: 'WH001',
+    to: 'ABC Corporation',
     quantity: 50,
     status: 'Completed',
-    user: 'Admin User'
+    productName: 'Wireless Mouse',
+    operationType: 'Delivery'
   },
   {
     id: 2,
+    referenceId: 'DO-2024-001',
     date: '2024-11-21',
-    reference: 'DO-2024-001',
-    type: 'Delivery',
-    productId: 2,
-    productName: 'USB-C Cable',
-    fromWarehouse: 'Main Warehouse',
-    toLocation: 'ABC Corporation',
+    contact: 'Jane Doe',
+    from: 'WH001',
+    to: 'ABC Corporation',
     quantity: 100,
     status: 'Completed',
-    user: 'Admin User'
+    productName: 'USB-C Cable',
+    operationType: 'Delivery'
   },
   {
     id: 3,
+    referenceId: 'REC-2024-001',
     date: '2024-11-20',
-    reference: 'REC-2024-001',
-    type: 'Receipt',
-    productId: 1,
-    productName: 'Wireless Mouse',
-    fromLocation: 'Tech Supplies Inc',
-    toWarehouse: 'Main Warehouse',
+    contact: 'John Smith',
+    from: 'Tech Supplies Inc',
+    to: 'WH001',
     quantity: 200,
     status: 'Completed',
-    user: 'Admin User'
+    productName: 'Wireless Mouse',
+    operationType: 'Receipt'
   },
   {
     id: 4,
-    date: '2024-11-20',
-    reference: 'REC-2024-001',
-    type: 'Receipt',
-    productId: 3,
+    referenceId: 'REC-2024-004',
+    date: '2024-11-23',
+    contact: 'Emily Davis',
+    from: 'Tech Supplies Inc',
+    to: 'WH002',
+    quantity: 100,
+    status: 'In Transit',
     productName: 'Mechanical Keyboard',
-    fromLocation: 'Tech Supplies Inc',
-    toWarehouse: 'Main Warehouse',
-    quantity: 98,
-    status: 'Completed',
-    user: 'Admin User'
+    operationType: 'Receipt'
   },
   {
     id: 5,
+    referenceId: 'TR-2024-001',
     date: '2024-11-19',
-    reference: 'TR-2024-001',
-    type: 'Transfer',
-    productId: 1,
-    productName: 'Wireless Mouse',
-    fromWarehouse: 'Main Warehouse',
-    toWarehouse: 'West Coast Hub',
+    contact: 'Internal Transfer',
+    from: 'WH001',
+    to: 'WH002',
     quantity: 50,
     status: 'Completed',
-    user: 'Admin User'
+    productName: 'Wireless Mouse',
+    operationType: 'Transfer'
   },
   {
     id: 6,
+    referenceId: 'TR-2024-001',
     date: '2024-11-19',
-    reference: 'TR-2024-001',
-    type: 'Transfer',
-    productId: 2,
-    productName: 'USB-C Cable',
-    fromWarehouse: 'Main Warehouse',
-    toWarehouse: 'West Coast Hub',
+    contact: 'Internal Transfer',
+    from: 'WH001',
+    to: 'WH002',
     quantity: 100,
     status: 'Completed',
-    user: 'Admin User'
+    productName: 'USB-C Cable',
+    operationType: 'Transfer'
   },
   {
     id: 7,
-    date: '2024-11-18',
-    reference: 'ADJ-2024-001',
-    type: 'Adjustment',
-    productId: 1,
-    productName: 'Wireless Mouse',
-    warehouse: 'Main Warehouse',
-    quantity: -2,
-    status: 'Completed',
-    user: 'Admin User'
+    referenceId: 'DO-2024-003',
+    date: '2024-11-24',
+    contact: 'Lisa Martinez',
+    from: 'WH001',
+    to: 'Tech Store Plus',
+    quantity: 10,
+    status: 'Pending',
+    productName: 'Monitor 27"',
+    operationType: 'Delivery'
   },
   {
     id: 8,
-    date: '2024-11-20',
-    reference: 'ADJ-2024-002',
-    type: 'Adjustment',
-    productId: 2,
+    referenceId: 'REC-2024-002',
+    date: '2024-11-22',
+    contact: 'Sarah Johnson',
+    from: 'Cable Co',
+    to: 'WH001',
+    quantity: 500,
+    status: 'Pending',
     productName: 'USB-C Cable',
-    warehouse: 'Main Warehouse',
-    quantity: -5,
-    status: 'Completed',
-    user: 'Admin User'
+    operationType: 'Receipt'
   }
 ];
 

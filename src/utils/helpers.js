@@ -32,14 +32,18 @@ export const formatDateTime = (dateString) => {
   }).format(date);
 };
 
-// Get status badge color
+// Get status badge color - Updated for schema statuses
 export const getStatusColor = (status) => {
   const colors = {
     'Draft': 'bg-gray-100 text-gray-800',
     'Waiting': 'bg-yellow-100 text-yellow-800',
+    'Late': 'bg-red-100 text-red-800',
+    'Operational': 'bg-blue-100 text-blue-800',
     'Ready': 'bg-blue-100 text-blue-800',
     'Done': 'bg-green-100 text-green-800',
     'Completed': 'bg-green-100 text-green-800',
+    'In Transit': 'bg-purple-100 text-purple-800',
+    'Pending': 'bg-yellow-100 text-yellow-800',
     'Canceled': 'bg-red-100 text-red-800',
     'Active': 'bg-green-100 text-green-800',
     'Inactive': 'bg-gray-100 text-gray-800'
@@ -47,26 +51,41 @@ export const getStatusColor = (status) => {
   return colors[status] || 'bg-gray-100 text-gray-800';
 };
 
-// Calculate total stock for a product
+// Calculate total stock for a product - Updated for new schema
 export const getTotalStock = (product) => {
-  return product.stock.reduce((sum, s) => sum + s.quantity, 0);
+  return product.inventoryCount || 0;
 };
 
-// Check if product is low on stock
+// Get free to use inventory
+export const getFreeToUseInventory = (product) => {
+  return product.freeToUseInventory || 0;
+};
+
+// Check if product is low on stock - Updated for new schema
 export const isLowStock = (product) => {
-  return product.stock.some(s => s.quantity < s.minStock);
+  // Consider low stock if free inventory is less than 20% of total
+  const threshold = product.inventoryCount * 0.2;
+  return product.freeToUseInventory < threshold;
 };
 
-// Get warehouse name by ID
-export const getWarehouseName = (warehouses, id) => {
+// Get warehouse name by ID or short code
+export const getWarehouseName = (warehouses, identifier) => {
+  const warehouse = warehouses.find(w => 
+    w.id === identifier || w.warehouseShortCode === identifier
+  );
+  return warehouse ? warehouse.warehouseName : identifier;
+};
+
+// Get warehouse short code by ID
+export const getWarehouseCode = (warehouses, id) => {
   const warehouse = warehouses.find(w => w.id === id);
-  return warehouse ? warehouse.name : 'Unknown';
+  return warehouse ? warehouse.warehouseShortCode : 'Unknown';
 };
 
 // Get product name by ID
 export const getProductName = (products, id) => {
   const product = products.find(p => p.id === id);
-  return product ? product.name : 'Unknown';
+  return product ? product.productName : 'Unknown';
 };
 
 // Filter items by search term

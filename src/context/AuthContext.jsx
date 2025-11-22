@@ -30,20 +30,20 @@ export const AuthProvider = ({ children }) => {
     return { success: false, error: 'Invalid email or password' };
   };
 
-  const signup = (name, email, password) => {
+  const signup = (loginId, name, email, password, role = 'Warehouse Staff') => {
     // Check if user already exists
-    const existingUser = users.find(u => u.email === email);
+    const existingUser = users.find(u => u.email === email || u.loginId === loginId);
     if (existingUser) {
-      return { success: false, error: 'Email already registered' };
+      return { success: false, error: 'Email or Login ID already registered' };
     }
 
     // Create new user
     const newUser = {
       id: users.length + 1,
+      loginId,
       name,
       email,
-      role: 'User',
-      avatar: null
+      role
     };
 
     users.push({ ...newUser, password });
